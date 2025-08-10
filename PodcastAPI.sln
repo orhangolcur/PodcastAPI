@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4E10A581-64DF-4DC7-ADC1-926238377F26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{774B604C-35F0-4072-978E-B1CCFC14E47E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastAPI.Domain", "Core\PodcastAPI.Domain\PodcastAPI.Domain.csproj", "{56245E47-B504-40B1-B8A4-8B8F203134C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastAPI.Application", "Core\PodcastAPI.Application\PodcastAPI.Application.csproj", "{3998AEC1-468D-4AFA-9D0D-0310740B835C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastAPI.Infrastructure", "Infrastructure\PodcastAPI.Infrastructure\PodcastAPI.Infrastructure.csproj", "{D1DBE8F2-0064-430F-B77A-A5D135BF7270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastAPI.Persistence", "Infrastructure\PodcastAPI.Persistence\PodcastAPI.Persistence.csproj", "{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastAPI.API", "Presentation\PodcastAPI.API\PodcastAPI.API.csproj", "{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56245E47-B504-40B1-B8A4-8B8F203134C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56245E47-B504-40B1-B8A4-8B8F203134C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56245E47-B504-40B1-B8A4-8B8F203134C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56245E47-B504-40B1-B8A4-8B8F203134C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3998AEC1-468D-4AFA-9D0D-0310740B835C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3998AEC1-468D-4AFA-9D0D-0310740B835C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3998AEC1-468D-4AFA-9D0D-0310740B835C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3998AEC1-468D-4AFA-9D0D-0310740B835C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DBE8F2-0064-430F-B77A-A5D135BF7270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1DBE8F2-0064-430F-B77A-A5D135BF7270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1DBE8F2-0064-430F-B77A-A5D135BF7270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1DBE8F2-0064-430F-B77A-A5D135BF7270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56245E47-B504-40B1-B8A4-8B8F203134C8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3998AEC1-468D-4AFA-9D0D-0310740B835C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{D1DBE8F2-0064-430F-B77A-A5D135BF7270} = {4E10A581-64DF-4DC7-ADC1-926238377F26}
+		{F8C20BF8-16E9-4A35-BDEF-29FADA7A838C} = {4E10A581-64DF-4DC7-ADC1-926238377F26}
+		{80A4C13E-C7FE-4287-B0A2-6D2CFD6F3B09} = {774B604C-35F0-4072-978E-B1CCFC14E47E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {127ADB6C-E3FE-40F9-BB70-BA0FA0D79051}
+	EndGlobalSection
+EndGlobal
