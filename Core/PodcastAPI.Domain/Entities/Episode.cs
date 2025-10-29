@@ -9,7 +9,7 @@
         public DateTime PublishedDate { get; set; }
         public TimeSpan Duration { get; set; }
 
-        public int PodcastId { get; set; }
+        public Guid PodcastId { get; set; }
         public Podcast Podcast { get; set; } = null!;
     }
 }

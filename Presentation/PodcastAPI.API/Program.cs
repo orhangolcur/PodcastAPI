@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using PodcastAPI.Persistence.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("PodcastAPIConnectionString");
+
+builder.Services.AddDbContext<PodcastAPIDbContext>(options =>
+    options.UseSqlite(connectionString));
 
 // Add services to the container.
 

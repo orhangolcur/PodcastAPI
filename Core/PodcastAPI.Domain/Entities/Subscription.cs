@@ -2,10 +2,10 @@
 {
     public class Subscription
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; } = null!;
 
-        public int PodcastId { get; set; }
+        public Guid PodcastId { get; set; }
         public Podcast Podcast { get; set; } = null!;
 
         public DateTime SubscribedDate { get; set; } = DateTime.UtcNow;
