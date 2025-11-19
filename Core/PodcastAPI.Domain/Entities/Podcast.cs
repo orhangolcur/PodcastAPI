@@ -10,5 +10,6 @@
 
         public ICollection<Episode> Episodes { get; set; } = new List<Episode>();
         public ICollection<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+
     }
 }

@@ -10,4 +10,12 @@
     <ProjectReference Include="..\PodcastAPI.Domain\PodcastAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.1.0" />
+  </ItemGroup>
+
 </Project>

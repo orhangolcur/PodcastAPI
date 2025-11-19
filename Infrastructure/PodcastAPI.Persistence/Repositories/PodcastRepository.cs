@@ -22,7 +22,7 @@ namespace PodcastAPI.Persistence.Repositories
 
         public async Task<List<Podcast>> GetAllAsync()
         {
-            // Eagerly load Episodes and Subscriptions
+            // Eagerly load Episodes
             return await _context.Podcasts
                 .Include(p => p.Episodes)
                 .ToListAsync();
@@ -30,6 +30,7 @@ namespace PodcastAPI.Persistence.Repositories
 
         public async Task<Podcast?> GetByIdAsync(Guid id)
         {
+            // Eagerly load Episodes
             return await _context.Podcasts
                 .Include(p => p.Episodes)
                 .FirstOrDefaultAsync(p => p.Id == id);
