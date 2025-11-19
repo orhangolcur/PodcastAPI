@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PodcastAPI.Application;
 using PodcastAPI.Domain.Interfaces;
 using PodcastAPI.Persistence;
 using PodcastAPI.Persistence.Contexts;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PodcastAPIConnectionString");
 
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 // Add services to the container.
 
