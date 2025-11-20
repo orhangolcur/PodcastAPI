@@ -3,11 +3,6 @@ using PodcastAPI.Application.Abstractions;
 using PodcastAPI.Application.DTOs.Podcast;
 using PodcastAPI.Domain.Entities;
 using PodcastAPI.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PodcastAPI.Application.Services
 {
