@@ -7,6 +7,8 @@
         public string Description { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
         public string RssUrl { get; set; } = string.Empty;
+        public string Category { get; set; } = "Genel";
+        public bool IsTrend { get; set; } = false;
 
         public ICollection<Episode> Episodes { get; set; } = new List<Episode>();
         public ICollection<Subscription> Subscriptions { get; set; } = new List<Subscription>();

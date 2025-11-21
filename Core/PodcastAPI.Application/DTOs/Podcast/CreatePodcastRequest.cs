@@ -12,5 +12,7 @@ namespace PodcastAPI.Application.DTOs.Podcast
         public string Description { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
         public string RssUrl { get; set; } = string.Empty;
+        public string Category { get; set; } = "Genel";
+        public bool IsTrend { get; set; } = false;
     }
 }
