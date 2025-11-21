@@ -15,6 +15,7 @@ namespace PodcastAPI.Persistence
                 options.UseSqlite(configuration.GetConnectionString("PodcastAPIConnectionString")));
             services.AddScoped<IPodcastRepository, PodcastRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
             return services;
         }

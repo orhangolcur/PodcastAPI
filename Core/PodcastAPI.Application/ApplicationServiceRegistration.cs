@@ -12,6 +12,7 @@ namespace PodcastAPI.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IPodcastService, PodcastService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
 
             return services;
         }
