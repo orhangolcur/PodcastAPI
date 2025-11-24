@@ -11,15 +11,29 @@ namespace PodcastAPI.Application.Services
         private readonly IPodcastRepository _podcastRepository;
         private readonly IMapper _mapper;
 
-        public PodcastService(IMapper mapper, IPodcastRepository podcastRepository)
+        private readonly IRssService _rssService;
+
+        public PodcastService(IMapper mapper, IPodcastRepository podcastRepository, IRssService rssService)
         {
             _mapper = mapper;
             _podcastRepository = podcastRepository;
+            _rssService = rssService;
         }
 
         public async Task<PodcastDto> CreatePodcastAsync(CreatePodcastRequest createPodcastDto)
         {
             var podcastEntity = _mapper.Map<Podcast>(createPodcastDto);
+
+            podcastEntity.Id = Guid.NewGuid();  
+
+            if (!string.IsNullOrEmpty(createPodcastDto.RssUrl))
+            {
+                var episodes = await _rssService.GetEpisodesFromRss(createPodcastDto.RssUrl, podcastEntity.Id);
+                if (episodes.Count > 0)
+                {
+                    podcastEntity.Episodes = episodes;
+                }   
+            }
             await _podcastRepository.AddAsync(podcastEntity);
             var podcastDto = _mapper.Map<PodcastDto>(podcastEntity);
             return podcastDto;
