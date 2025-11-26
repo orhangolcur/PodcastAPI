@@ -18,7 +18,7 @@ namespace PodcastAPI.Application.Services
         }
         public async Task<List<PodcastDto>> GetUserSubscriptionsAsync(Guid userId)
         {
-            var podcasts = _subscriptionRepository.GetUserSubscriptionsAsync(userId);
+            var podcasts = await _subscriptionRepository.GetUserSubscriptionsAsync(userId);
             return _mapper.Map<List<PodcastDto>>(podcasts);
         }
 

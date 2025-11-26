@@ -16,10 +16,9 @@ namespace PodcastAPI.Persistence.Repositories
 
         public async Task<List<Podcast>> GetUserSubscriptionsAsync(Guid userId)
         {
-            return await _context.Subscriptions
-                .Where(s => s.UserId == userId)
-                .Include(s => s.Podcast)
-                .Select(s => s.Podcast)
+            return await _context.Podcasts
+                .Where(p => p.Subscriptions.Any(s => s.UserId == userId))
+                .Include(p => p.Episodes)
                 .ToListAsync();
         }
 
