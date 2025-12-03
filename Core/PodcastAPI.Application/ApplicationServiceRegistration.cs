@@ -10,9 +10,11 @@ namespace PodcastAPI.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddScoped<IPodcastService, PodcastService>();
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISubscriptionService, SubscriptionService>();
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             return services;
         }

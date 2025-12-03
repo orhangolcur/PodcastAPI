@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PodcastAPI.Application.Abstractions;
-using PodcastAPI.Application.DTOs.Podcast;
+using PodcastAPI.Application.Features.Podcasts.Commands.CreatePodcast;
+using PodcastAPI.Application.Features.Podcasts.Queries.GetAllPodcasts;
+using PodcastAPI.Application.Features.Podcasts.Queries.GetPodcastById;
 
 namespace PodcastAPI.API.Controllers
 {
@@ -9,36 +11,39 @@ namespace PodcastAPI.API.Controllers
     [ApiController]
     public class PodcastsController : ControllerBase
     {
-        private readonly IPodcastService _podcastService;
-        public PodcastsController(IPodcastService podcastService)
+        private readonly IMediator _mediator;
+
+        public PodcastsController(IMediator mediator)
         {
-            _podcastService = podcastService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllPodcasts()
+        public async Task<IActionResult> GetAllPodcasts([FromQuery] GetAllPodcastsQueryRequest getAllPodcastsQueryRequest)
         {
-            var podcasts = await _podcastService.GetAllPodcastsAsync();
-            return Ok(podcasts);
+            List<GetAllPodcastsQueryResponse> response = await _mediator.Send(getAllPodcastsQueryRequest);
+            return Ok(response);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPodcastById(Guid id)
         {
-            var podcast = await _podcastService.GetPodcastByIdAsync(id);
-            if (podcast == null)
-                return NotFound("Böyle bir podcast bulunamadı!");
-            return Ok(podcast);
+            var request = new GetPodcastByIdQueryRequest(id);
+
+            GetPodcastByIdQueryResponse response = await _mediator.Send(request);
+
+            if (response == null) return NotFound();
+            
+            return Ok(response);
         }
+        
 
         [HttpPost]
-        public async Task<IActionResult> CreatePodcast([FromBody] CreatePodcastRequest createPodcastDto)
+        [Authorize]
+        public async Task<IActionResult> CreatePodcast([FromBody] CreatePodcastCommandRequest createPodcastCommandRequest)
         {
-            if(string.IsNullOrEmpty(createPodcastDto.Title))
-                return BadRequest("Podcast başlığı boş olamaz!");
-
-            var createdPodcast = await _podcastService.CreatePodcastAsync(createPodcastDto);
-            return CreatedAtAction(nameof(GetPodcastById), new { id = createdPodcast.Id }, createdPodcast);
+            CreatePodcastCommandResponse response = await _mediator.Send(createPodcastCommandRequest);
+            return Ok(response);
         }
     }
 }
