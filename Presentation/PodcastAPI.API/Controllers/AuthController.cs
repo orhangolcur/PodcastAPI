@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PodcastAPI.Application.Abstractions;
-using PodcastAPI.Application.DTOs.Auth;
+using PodcastAPI.Application.Features.Auth.Commands.Login;
+using PodcastAPI.Application.Features.Auth.Commands.Register;
 
 namespace PodcastAPI.API.Controllers
 {
@@ -9,20 +9,20 @@ namespace PodcastAPI.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IMediator _mediator;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IMediator mediator)
         {
-            _authService = authService;
+            _mediator = mediator;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
+        public async Task<IActionResult> Register([FromBody] Register.Command command)
         {
             try
             {
-                var authResponse = await _authService.RegisterAsync(registerRequest);
-                return Ok(authResponse);
+                var response = await _mediator.Send(command);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -31,14 +31,14 @@ namespace PodcastAPI.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] Login.Command command)
         {
-            var authResponse = await _authService.LoginAsync(loginRequest);
-            if (authResponse == null)
+            var response = await _mediator.Send(command);
+            if (response == null)
             {
                 return Unauthorized("Invalid credentials.");
             }
-            return Ok(authResponse);
+            return Ok(response);
         }
     }
 }

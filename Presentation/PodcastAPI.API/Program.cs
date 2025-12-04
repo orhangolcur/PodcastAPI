@@ -64,6 +64,7 @@ builder.Services.AddSwaggerGen(option =>
             new string[] { }
         }
     });
+    option.CustomSchemaIds(type => type.ToString().Replace("+", "."));
 });
 
 var app = builder.Build();

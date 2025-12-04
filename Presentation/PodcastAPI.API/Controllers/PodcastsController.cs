@@ -19,20 +19,20 @@ namespace PodcastAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllPodcasts([FromQuery] GetAllPodcastsQueryRequest getAllPodcastsQueryRequest)
+        public async Task<IActionResult> GetAllPodcasts([FromQuery] GetAllPodcast.Query query)
         {
-            List<GetAllPodcastsQueryResponse> response = await _mediator.Send(getAllPodcastsQueryRequest);
+            var response = await _mediator.Send(query);
             return Ok(response);
         }
         
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPodcastById(Guid id)
         {
-            var request = new GetPodcastByIdQueryRequest(id);
+            var request = new GetPodcastById.Query { Id = id };
 
-            GetPodcastByIdQueryResponse response = await _mediator.Send(request);
+            var response = await _mediator.Send(request);
 
-            if (response == null) return NotFound();
+            if (response == null) return NotFound("Podcast Not Found!");
             
             return Ok(response);
         }
@@ -40,9 +40,9 @@ namespace PodcastAPI.API.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreatePodcast([FromBody] CreatePodcastCommandRequest createPodcastCommandRequest)
+        public async Task<IActionResult> CreatePodcast([FromBody] CreatePodcast.Command command)
         {
-            CreatePodcastCommandResponse response = await _mediator.Send(createPodcastCommandRequest);
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }

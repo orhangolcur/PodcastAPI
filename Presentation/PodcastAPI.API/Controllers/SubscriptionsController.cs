@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PodcastAPI.Application.Abstractions;
+using PodcastAPI.Application.Features.Subscriptions.Commands;
+using PodcastAPI.Application.Features.Subscriptions.Queries;
 using System.Security.Claims;
 
 namespace PodcastAPI.API.Controllers
@@ -9,11 +12,11 @@ namespace PodcastAPI.API.Controllers
     [ApiController]
     public class SubscriptionsController : ControllerBase
     {
-        private readonly ISubscriptionService _subscriptionService;
+        private readonly IMediator _mediator;
 
-        public SubscriptionsController(ISubscriptionService subscriptionService)
+        public SubscriptionsController(IMediator mediator)
         {
-            _subscriptionService = subscriptionService;
+            _mediator = mediator;
         }
 
         [HttpPost("{podcastId}")]
@@ -23,15 +26,14 @@ namespace PodcastAPI.API.Controllers
 
             if (userIdClaim == null) return Unauthorized();
             
-            var userId = Guid.Parse(userIdClaim.Value);
+            var command = new ToggleSubscription.Command
+            {
+                UserId = Guid.Parse(userIdClaim.Value),
+                PodcastId = podcastId
+            };
 
-            bool isSubscribed = await _subscriptionService.ToogleSubscriptionAsync(userId, podcastId);
-
-            return Ok(new 
-            { 
-                Subscribed = isSubscribed,
-                Message = isSubscribed ? "Added to favorites." : "Removed from favorites."
-            });
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpGet]
@@ -40,11 +42,13 @@ namespace PodcastAPI.API.Controllers
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
             if (userIdClaim == null) return Unauthorized();
-            var userId = Guid.Parse(userIdClaim.Value);
-            
-            var subscriptions = await _subscriptionService.GetUserSubscriptionsAsync(userId);
-            
-            return Ok(subscriptions);
+
+            var query = new GetMySubscriptions.Query
+            {
+                UserId = Guid.Parse(userIdClaim.Value)
+            };
+            var response = await _mediator.Send(query);
+            return Ok(response);
         }
     }
 }

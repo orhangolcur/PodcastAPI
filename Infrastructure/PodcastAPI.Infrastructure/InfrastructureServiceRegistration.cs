@@ -9,6 +9,7 @@ namespace PodcastAPI.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IRssService, RssService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             return services;
         }
