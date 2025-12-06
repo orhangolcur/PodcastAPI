@@ -35,5 +35,20 @@ namespace PodcastAPI.Persistence.Repositories
                 .Include(p => p.Episodes)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public Task<List<Podcast>> SearchAsync(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return GetAllAsync();
+            }
+
+            var lowerTerm = searchTerm.ToLower();
+            return _context.Podcasts
+                .Where(p => p.Title.ToLower().Contains(lowerTerm) || p.Description.ToLower().Contains(lowerTerm) || p.Category.ToLower().Contains(lowerTerm))
+                .Include(p => p.Episodes)
+                .ToListAsync();
+
+        }
     }
 }

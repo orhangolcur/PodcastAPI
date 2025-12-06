@@ -7,5 +7,6 @@ namespace PodcastAPI.Domain.Interfaces
         Task<Podcast?> GetByIdAsync(Guid id);
         Task<List<Podcast>> GetAllAsync();
         Task AddAsync(Podcast podcast);
+        Task<List<Podcast>> SearchAsync(string searchTerm);
     }
 }
