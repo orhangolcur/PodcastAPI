@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace PodcastAPI.API.Middlewares
@@ -29,16 +28,17 @@ namespace PodcastAPI.API.Middlewares
         {
             context.Response.ContentType = "application/json";
 
-            var statusCode = StatusCodes.Status500InternalServerError;
             var response = new
             {
                 Title = "Bir hata oluştu",
                 Errors = new List<string> { exception.Message }
             };
 
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
             if (exception is ValidationException validationException)
             {
-                statusCode = StatusCodes.Status400BadRequest;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 response = new
                 {
                     Title = "Doğrulama Hatası",
@@ -46,8 +46,8 @@ namespace PodcastAPI.API.Middlewares
                 };
             }
 
-            context.Response.StatusCode = statusCode;
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            return context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions));
         }
     }
 }
