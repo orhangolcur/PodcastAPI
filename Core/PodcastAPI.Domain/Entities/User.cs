@@ -6,6 +6,8 @@
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
+        public string? Bio { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; } = string.Empty;
 
         public ICollection<Subscription> Subscriptions { get; set; } = new List<Subscription>(); 
     }

@@ -489,3 +489,6 @@ $RECYCLE.BIN/
 *.db-wal
 *.mdf
 *.ldf
+
+# Local Test Images
+**/wwwroot/images/
