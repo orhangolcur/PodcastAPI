@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PodcastAPI.API.BackgroundServices;
 using PodcastAPI.API.Middlewares;
 using PodcastAPI.Application;
 using PodcastAPI.Infrastructure;
@@ -71,6 +72,8 @@ builder.Services.AddSwaggerGen(option =>
     });
     option.CustomSchemaIds(type => type.ToString().Replace("+", "."));
 });
+
+builder.Services.AddHostedService<PodcastUpdateWorker>();
 
 var app = builder.Build();
 
