@@ -10,6 +10,7 @@ namespace PodcastAPI.Infrastructure
         {
             services.AddScoped<IRssService, RssService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IFileService, LocalFileService>();
 
             return services;
         }

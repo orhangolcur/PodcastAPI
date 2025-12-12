@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Core\PodcastAPI.Application\PodcastAPI.Application.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
 </Project>

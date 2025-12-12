@@ -22,6 +22,8 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
             public Guid Id { get; set; }
             public string Username { get; set; } = string.Empty;
             public string Email { get; set; } = string.Empty;
+            public string Bio { get; set; }
+            public string ImageUrl { get; set; }
             public string Token { get; set; } = string.Empty;
         }
 
@@ -49,6 +51,8 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
                     Id = user.Id,
                     Username = user.Username,
                     Email = user.Email,
+                    Bio = user.Bio ?? "",
+                    ImageUrl = user.ImageUrl ?? "",
                     Token = token
                 };
             }
