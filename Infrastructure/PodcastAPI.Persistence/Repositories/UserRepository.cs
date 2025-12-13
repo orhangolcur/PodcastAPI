@@ -20,10 +20,10 @@ namespace PodcastAPI.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User?> GetByEmailAsync(string username)
+        public async Task<User?> GetByEmailAsync(string email)
         {
             return await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == username);
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<User?> GetByIdAsync(Guid id)

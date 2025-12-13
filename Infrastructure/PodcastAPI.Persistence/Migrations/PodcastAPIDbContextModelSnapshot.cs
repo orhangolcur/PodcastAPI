@@ -123,6 +123,12 @@ namespace PodcastAPI.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PasswordResetToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("PasswordResetTokenExpiryTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("RefreshToken")
                         .HasColumnType("TEXT");
 

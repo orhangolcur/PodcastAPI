@@ -19,7 +19,9 @@ namespace PodcastAPI.Persistence.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    RssUrl = table.Column<string>(type: "TEXT", nullable: false)
+                    RssUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false),
+                    IsTrend = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,7 +35,13 @@ namespace PodcastAPI.Persistence.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false)
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
+                    Bio = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    RefreshToken = table.Column<string>(type: "TEXT", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    PasswordResetToken = table.Column<string>(type: "TEXT", nullable: true),
+                    PasswordResetTokenExpiryTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
