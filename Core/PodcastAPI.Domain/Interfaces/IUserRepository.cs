@@ -8,5 +8,6 @@ namespace PodcastAPI.Domain.Interfaces
         Task<User?> GetByEmailAsync(string username);
         Task AddAsync(User user);
         Task UpdateAsync(User user);
+        Task<User?> GetByRefreshTokenAsync(string refreshToken);
     }
 }

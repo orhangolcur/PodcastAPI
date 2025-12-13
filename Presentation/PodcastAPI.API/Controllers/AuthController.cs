@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PodcastAPI.Application.Features.Auth.Commands.Login;
+using PodcastAPI.Application.Features.Auth.Commands.RefreshToken;
 using PodcastAPI.Application.Features.Auth.Commands.Register;
 
 namespace PodcastAPI.API.Controllers
@@ -37,6 +38,17 @@ namespace PodcastAPI.API.Controllers
             if (response == null)
             {
                 return Unauthorized("Invalid credentials.");
+            }
+            return Ok(response);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshToken.Command command)
+        {
+            var response = await _mediator.Send(command);
+            if (!response.Success)
+            {
+                return Unauthorized(response.Message);
             }
             return Ok(response);
         }

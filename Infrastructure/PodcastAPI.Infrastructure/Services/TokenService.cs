@@ -4,6 +4,7 @@ using PodcastAPI.Application.Abstractions;
 using PodcastAPI.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace PodcastAPI.Infrastructure.Services
@@ -15,6 +16,16 @@ namespace PodcastAPI.Infrastructure.Services
         public TokenService(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[64];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
         }
 
         public string GenerateToken(User user)

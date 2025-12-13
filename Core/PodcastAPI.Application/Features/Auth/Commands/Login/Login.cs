@@ -25,6 +25,7 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
             public string Bio { get; set; }
             public string ImageUrl { get; set; }
             public string Token { get; set; } = string.Empty;
+            public string RefreshToken { get; set; } = string.Empty;
         }
 
         public class Handler : IRequestHandler<Command, Response>
@@ -46,6 +47,13 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
 
                 var token = _tokenService.GenerateToken(user);
 
+                var refreshToken = _tokenService.GenerateRefreshToken();
+
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+
+                await _userRepository.UpdateAsync(user);
+
                 return new Response
                 {
                     Id = user.Id,
@@ -53,7 +61,8 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
                     Email = user.Email,
                     Bio = user.Bio ?? "",
                     ImageUrl = user.ImageUrl ?? "",
-                    Token = token
+                    Token = token,
+                    RefreshToken = refreshToken
                 };
             }
         }
