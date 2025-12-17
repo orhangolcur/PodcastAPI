@@ -30,7 +30,7 @@ namespace PodcastAPI.API.Middlewares
 
             var response = new
             {
-                Title = "Bir hata oluştu",
+                Title = "An unexpected error occurred",
                 Errors = new List<string> { exception.Message }
             };
 
@@ -41,7 +41,7 @@ namespace PodcastAPI.API.Middlewares
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 response = new
                 {
-                    Title = "Doğrulama Hatası",
+                    Title = "Validation Error",
                     Errors = validationException.Errors.Select(e => e.ErrorMessage).ToList()
                 };
             }

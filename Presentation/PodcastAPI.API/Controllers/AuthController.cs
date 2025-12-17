@@ -39,7 +39,7 @@ namespace PodcastAPI.API.Controllers
             var response = await _mediator.Send(command);
             if (response == null)
             {
-                return Unauthorized("Invalid credentials.");
+                return Unauthorized("Email or Password is incorrect.");
             }
             return Ok(response);
         }

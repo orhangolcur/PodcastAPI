@@ -9,12 +9,13 @@ namespace PodcastAPI.Application.Features.Users.Commands.UpdateProfile
 {
     public class UpdateProfileValidator : AbstractValidator<UpdateProfile.Command>
     {
-        public UpdateProfileValidator() 
+        public UpdateProfileValidator()
         {
             RuleFor(x => x.Username)
-                .NotEmpty().WithMessage("Kullanıcı adı boş olamaz");
+                .NotEmpty().WithMessage("Username cannot be empty.");
+
             RuleFor(x => x.Bio)
-                .MaximumLength(200).WithMessage("Biyografi 500 karakterden fazla olamaz");
+                .MaximumLength(200).WithMessage("Biography cannot exceed 200 characters.");
         }
     }
 }

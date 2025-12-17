@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System;
 
 namespace PodcastAPI.Application.Features.Podcasts.Commands.CreatePodcast
 {
@@ -7,21 +8,21 @@ namespace PodcastAPI.Application.Features.Podcasts.Commands.CreatePodcast
         public CreatePodcastValidator()
         {
             RuleFor(x => x.Title)
-                .NotEmpty().WithMessage("Podcast başlığı boş olamaz")
+                .NotEmpty().WithMessage("Podcast title cannot be empty.")
                 .NotNull()
-                .MaximumLength(100).WithMessage("Başlık 100 karakterden uzun olamaz");
+                .MaximumLength(100).WithMessage("Title cannot exceed 100 characters.");
 
             RuleFor(x => x.Description)
-                .NotEmpty().WithMessage("Açıklama alanı zorunludur");
+                .NotEmpty().WithMessage("Description field is required.");
 
             RuleFor(x => x.Category)
-                .NotEmpty().WithMessage("Kategori seçmelisiniz")
-                .NotEqual("Genel").WithMessage("Lütfen geçerli bir kategori seçin");
+                .NotEmpty().WithMessage("You must select a category.")
+                .NotEqual("General").WithMessage("Please select a valid category other than 'General'.");
 
             RuleFor(x => x.RssUrl)
-                .NotEmpty().WithMessage("RSS linki zorunludur")
+                .NotEmpty().WithMessage("RSS link is required.")
                 .Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
-                .WithMessage("Lütfen geçerli bir URL adresi giriniz");
+                .WithMessage("Please enter a valid URL address.");
         }
     }
 }

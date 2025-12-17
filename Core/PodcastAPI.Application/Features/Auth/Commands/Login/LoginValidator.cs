@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PodcastAPI.Application.Features.Auth.Commands.Login
 {
@@ -12,11 +7,11 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
         public LoginValidator() 
         {
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("E-posta boş olamaz")
-                .EmailAddress().WithMessage("Geçerli bir e-posta formatı değil");
+                .NotEmpty().WithMessage("Email is required.")
+                .EmailAddress().WithMessage("Please enter a valid email address.");
 
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("Şifre zorunludur.");
+                .NotEmpty().WithMessage("Password is required.");
         }
     }
 }
