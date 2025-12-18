@@ -40,7 +40,7 @@ namespace PodcastAPI.Application.Features.Auth.Commands.Login
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = await _userRepository.GetByEmailAsync(request.Email);
-                if (user == null) return null!;
+                if (user == null) throw new Exception("User Not Found!");
 
                 var isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
                 if (!isPasswordValid) return null!;
