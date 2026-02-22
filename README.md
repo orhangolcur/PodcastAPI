@@ -47,4 +47,23 @@ This project moves beyond standard CRUD operations by implementing modern backen
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/orhangolcur/PodcastAPI.git](https://github.com/orhangolcur/PodcastAPI.git)
+   git clone https://github.com/orhangolcur/PodcastAPI.git
+   ```
+   
+2. **Navigate to the API directory:**
+   ```bash
+   cd PodcastAPI/Presentation/PodcastAPI.API
+   ```
+
+3. **Configuration:**
+   * Update the `appsettings.json` file with your specific JWT Secret Keys and SMTP configuration details.
+
+4. **Apply database migrations:**
+   ```bash
+   dotnet ef database update
+   ```
+
+5. **Run the application:**
+   ```bash
+   dotnet run
+   ```
